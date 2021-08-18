@@ -2,11 +2,12 @@
   "menu": [
     {
       "title": "Visão geral",
+      "perm": "A00",
       "children": [
         {
-          "page": "Conhecendo o Jugaad",
+          "page": "Geral - Aplicação",
           "url": "/pages/overview/main"
-        },
+        }
       ]
     }
   ]

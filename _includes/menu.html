@@ -8,17 +8,26 @@
 
 <script type="text/javascript">
     let allMenus = [],
-      currentPage = `{{ page.url }}`
+      currentPage = `{{ page.url }}`,
+      permArgs = String(window.location.search).split('=')[1],
+      perms = String(permArgs).split(';');
 
     {% for item in site.data.sitemap.menu %}
       {% for entry in item.children %}
         allMenus.push({
             title: `{{ item["title"] }}`,
+            perm: `{{ item["perm"] }}`,
             page: `{{ entry["page"] }}`,
             url: `{{ entry["url"] }}`
         })
       {% endfor %}
     {% endfor %}
+
+    allMenus = allMenus.filter(function(r) {
+      return (!permArgs || permArgs.includes(r.perm));
+    });
+
+    console.log('all ', allMenus)
 
     let updateScroll = function(element) {
       let parent = document.getElementsByClassName('sidebar-contents')
